@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       // Now abb yha dekhe toh agr flight of departureId delete hogyi toh voh kis airpot pe depart hogi then uske corresponding airpot allocated tha in departureId contraint voh bhi delete ho jayega completely....
       this.hasMany(models.Flight,{ 
         foreignKey : 'departureAirpotId',
-        onDelete : 'CASCADE'
+        onDelete : 'CASCADE',
       }),
       this.hasMany(models.Flight,{
         foreignKey : 'arrivalAirpotId',

@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Flight,{ // Now yha onDelete ko isliye kyuki if the flight of certain id is deleted then the corresponding data of airplane should be deleted kyuki agr flight ki ni hui create toh kon airplane(modelNumber + capacity) create hoga....
         foreignKey : 'airplaneId',
         onDelete : 'CASCADE'
+      }),
+      this.hasMany(models.Seat,{
+        foreignKey : 'airplaneId',
+        onDelete : 'CASCADE'
       })
     }
   }

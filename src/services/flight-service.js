@@ -42,7 +42,22 @@ async function getAllFlights(query) {
         }
     }
     // console.log(customFilter);
-
+    // if(query.travellers) {
+    //     customFilter.totalSeats = {
+    //         [Op.gte]: query.travellers
+    //     }
+    // }
+    // if(query.tripDate) {
+    //     customFilter.departureTime = {
+    //         [Op.between]: [query.tripDate, query.tripDate + endingTripTime]
+    //     }
+    // }
+    // if(query.sort) {
+    //     const params = query.sort.split(',');
+    //     const sortFilters = params.map((param) => param.split('_'));
+    //     sortFilter = sortFilters;
+    // }
+    // console.log(customFilter,sortFilter);
     try {
         const flights = await new FlightRepository().getAllFlight(customFilter);
         return flights;
