@@ -40,6 +40,19 @@ async function createFlight_Controller(req,res){
     }
 }
 
+async function getAllFlight_Controller(req,res){
+    try {
+        const flights = await FlightService.getAllFlights(req.query);
+        SuccessResponse.data = flights;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
-    createFlight_Controller
+    createFlight_Controller,
+    getAllFlight_Controller
 }

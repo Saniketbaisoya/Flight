@@ -2,7 +2,7 @@ const { FlightRepository } = require("../repository");
 const AppError = require('../utlis/errors/error');
 const {StatusCodes} = require('http-status-codes');
 const { compareTime } = require("../utlis/helpers/dateTime-helper");
-
+const { Op } = require('sequelize');
 async function createFlight(data){
     try {
         // console.log("Sevice layer data : ",data);
@@ -25,6 +25,33 @@ async function createFlight(data){
     }
 }
 
+async function getAllFlights(query) {
+    // trips=MUM-HYD
+    let customFilter = {};
+
+    if(query.trips){
+       [departureAirpotId,arrivalAirpotId] = query.trips.split("-");
+       customFilter.departureAirpotId = departureAirpotId;
+       customFilter.arrivalAirpotId = arrivalAirpotId;
+    }
+
+    if(query.price){
+        [minPrice, maxPrice] = query.price.split("-");
+        customFilter.price = {
+            [Op.between]: [minPrice, ((maxPrice == undefined) ? 20000: maxPrice)]
+        }
+    }
+    // console.log(customFilter);
+
+    try {
+        const flights = await new FlightRepository().getAllFlight(customFilter);
+        return flights;
+    }catch (error) {
+        throw new AppError('Cannot fetch data of all the flights',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+
+}
 module.exports = {
-    createFlight
+    createFlight,
+    getAllFlights
 }
