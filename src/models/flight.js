@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Airplane,{
         foreignKey : 'airplaneId',
-         as : 'Airplane_details'
+        as : 'Airplane_details'
       }),
       this.belongsTo(models.Airpot,{
         foreignKey : 'departureAirpotId',
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       }),
       this.belongsTo(models.Airpot,{
         foreignKey : 'arrivalAirpotId',
-         as : 'ArrivalAirpot'
+        as : 'ArrivalAirpot'
       })
     }
   }
@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     boardingTime: {
       type : DataTypes.STRING
     },
-    totalSeats: {
+    totalSeats: { // total numbers of seats available in the current flight....
       type : DataTypes.INTEGER,
       allowNull : false,
     }

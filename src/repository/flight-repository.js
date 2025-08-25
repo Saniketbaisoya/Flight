@@ -16,7 +16,7 @@ class FlightRepository extends CrudRepository{
                 {
                     model : Airplane,
                     required : true,
-                    as : 'Airplane_details'
+                    as : 'Airplane_details'//
                 },
                 {
                     model : Airpot,
