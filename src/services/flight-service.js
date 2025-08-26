@@ -1,8 +1,10 @@
 const { FlightRepository } = require("../repository");
-const AppError = require('../utlis/errors/error');
+const AppError = require('../utils/errors/error');
 const {StatusCodes} = require('http-status-codes');
-const { compareTime } = require("../utlis/helpers/dateTime-helper");
+const { compareTime } = require("../utils/helpers/dateTime-helper");
 const { Op } = require('sequelize');
+
+// create a flight....
 async function createFlight(data){
     try {
         // console.log("Sevice layer data : ",data);
@@ -25,6 +27,7 @@ async function createFlight(data){
     }
 }
 
+// get all the flights details....
 async function getAllFlights(query) {
     // trips=MUM-HYD
     let customFilter = {};
@@ -66,7 +69,37 @@ async function getAllFlights(query) {
     }
 
 }
+
+// get the flight by the their given id...
+async function getFlight(id) {
+    try{
+        const flight = await new FlightRepository().get(id);
+        return flight;
+    }catch(error){
+        if(error.statusCode == StatusCodes.NOT_FOUND){
+            throw new AppError("The flight you requested is not Present",error.statusCode);
+        }
+        throw new AppError(`Cannot fetch the data of Flight Object with id : ${id}`,StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+// update the flight by their given id...
+async function updateFlight(id,data) {
+    try{
+        const response = await new FlightRepository().update(id,data);
+        
+        return response;
+    }catch(error){
+        console.log(error.statusCode);
+        if(error.statusCode == StatusCodes.NOT_FOUND){
+            throw new AppError("The flight is you requested is not Present ",error.statusCode);
+        }
+        throw new AppError("Cannot fetch all the data of Flight Object",StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 module.exports = {
     createFlight,
-    getAllFlights
+    getAllFlights,
+    getFlight,
+    updateFlight
 }

@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { logger } = require("../config/logger");
-const AppError = require("../utlis/errors/error");
+const AppError = require("../utils/errors/error");
 
 class CrudRepository{
     constructor(model){

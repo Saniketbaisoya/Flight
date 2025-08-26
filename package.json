@@ -1,7 +1,7 @@
 {
   "name": "flight_booking_server",
   "version": "1.0.0",
-  "description": "This is the flight booking backend project.",
+  "description": "This is the flight Service backend project.",
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon src/index.js"

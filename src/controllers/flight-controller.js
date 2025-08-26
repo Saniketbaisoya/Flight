@@ -1,5 +1,5 @@
 const {StatusCodes} = require('http-status-codes');
-const { SuccessResponse, ErrorResponse } = require('../utlis/common');
+const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const { FlightService } = require('../services');
 
 /**
@@ -51,8 +51,51 @@ async function getAllFlight_Controller(req,res){
     }
 }
 
+/**
+ * GET : /flights/1
+ * req.params.id
+ */
+async function getFlightById_Controller(req,res){
+    try {
+        const flights = await FlightService.getFlight(req.params.id);
+        SuccessResponse.data = flights;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    }catch (error) {
+        ErrorResponse.error = error;
+        return res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+    }
+}
 
+/**
+ * PATCH : /flights/1
+ * req.params.id = 1
+ * req.body : {
+ *  flightNumber : req.body.flightNumber,
+ *  airplaneId : req.body.airplaneId,
+ *  departureAirpotId : req.body.departureAirpotId,
+ *  arrivalAirpotId : req.body.arrivalAirpotId,
+ *  departureTime : req.body.departureTime,
+ *  arrivalTime : req.body.arrivalTime,
+ *  price : req.body.price,
+ *  boardingTime : req.body.boardingTime,
+ *  totalSeats : req.body.totalSeats
+ * }
+ */
+async function updateFlight_Controller(req,res) {
+    try {
+        const response = await FlightService.updateFlight(req.params.id,req.body);
+        SuccessResponse.message = "Successfully updated the data at Flight";
+        SuccessResponse.data = response;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.message = "Something went wrong can't update the data";
+        ErrorResponse.error = error;
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+    }
+}
 module.exports = {
     createFlight_Controller,
-    getAllFlight_Controller
+    getAllFlight_Controller,
+    getFlightById_Controller,
+    updateFlight_Controller
 }

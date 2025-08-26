@@ -1,6 +1,6 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-const {Enum} = require('../utlis/common');
+const {Enum} = require('../utils/common');
 const {BUISNESS, ECONOMY, PREMIUM_ECONOMY, FIRST_CLASS} = Enum.Seat_Type
 module.exports = {
   async up(queryInterface, Sequelize) {

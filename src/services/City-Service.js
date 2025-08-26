@@ -1,5 +1,5 @@
 const { CityRepository } = require("../repository");
-const AppError = require('../utlis/errors/error');
+const AppError = require('../utils/errors/error');
 const {StatusCodes} = require('http-status-codes');
 
 async function createCity(data){

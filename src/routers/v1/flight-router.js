@@ -15,6 +15,16 @@ FlightRouter.post('/',validateMiddlewareFlight.validateCreateRequest,FlightContr
  */
 FlightRouter.get('/',FlightController.getAllFlight_Controller);
 
+/**
+ * http://localhost:1000/api/v1/flights/:id
+ */
+FlightRouter.get('/:id',FlightController.getFlightById_Controller);
+
+/**
+ * http://localhost:1000/api/v1/flights/:id
+ */
+FlightRouter.patch('/:id',FlightController.updateFlight_Controller);
+
 module.exports = {
     FlightRouter
 }

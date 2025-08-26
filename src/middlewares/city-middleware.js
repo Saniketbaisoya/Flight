@@ -1,4 +1,4 @@
-const { ErrorResponse } = require("../utlis/common");
+const { ErrorResponse } = require("../utils/common");
 const {StatusCodes} = require('http-status-codes');
 
 function validateCreateRequestCity(req,res,next){
