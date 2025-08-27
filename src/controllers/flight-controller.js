@@ -40,6 +40,10 @@ async function createFlight_Controller(req,res){
     }
 }
 
+/**
+ * GET : /flights
+ * req.body = {}
+ */
 async function getAllFlight_Controller(req,res){
     try {
         const flights = await FlightService.getAllFlights(req.query);
@@ -54,6 +58,7 @@ async function getAllFlight_Controller(req,res){
 /**
  * GET : /flights/1
  * req.params.id
+ * req.body = {}
  */
 async function getFlightById_Controller(req,res){
     try {
