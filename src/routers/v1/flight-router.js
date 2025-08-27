@@ -25,6 +25,11 @@ FlightRouter.get('/:id',FlightController.getFlightById_Controller);
  */
 FlightRouter.patch('/:id',FlightController.updateFlight_Controller);
 
+/**
+ * http://localhost:1000/api/v1/flights/:id/seats
+ */
+FlightRouter.patch('/:id/seats',validateMiddlewareFlight.validateUpdateSeatsRequest,FlightController.updateSeats_Controller);
+
 module.exports = {
     FlightRouter
 }

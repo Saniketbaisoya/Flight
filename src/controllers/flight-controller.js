@@ -98,9 +98,36 @@ async function updateFlight_Controller(req,res) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
     }
 }
+
+/**
+ * PATCH : /flights/1
+ * req.params.id = 1
+ * req.body : {
+ *  flightId : req.params.id,
+ *  seats : req.body.seats,
+ *  dec : req.body.dec
+ * }
+*/
+async function updateSeats_Controller(req,res) {
+    try {
+        const response = await FlightService.updateSeats({
+            flightId : req.params.id,
+            seats : req.body.seats,
+            dec : req.body.dec
+        });
+        SuccessResponse.message = "SuccessFully updated the data at flight seats";
+        SuccessResponse.data = response;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.message = "Something went wrong can't update the data";
+        ErrorResponse.error = error;
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+    }
+}
 module.exports = {
     createFlight_Controller,
     getAllFlight_Controller,
     getFlightById_Controller,
-    updateFlight_Controller
+    updateFlight_Controller,
+    updateSeats_Controller
 }
